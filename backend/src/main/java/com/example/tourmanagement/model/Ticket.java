@@ -29,4 +29,8 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "departure_date_id", nullable = false)
     private DepartureDate departureDate;
+
+    @Column(nullable = false)
+    private String status = "BOOKED"; // mặc định khi tạo vé
+
 }

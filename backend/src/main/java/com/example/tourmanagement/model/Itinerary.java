@@ -2,6 +2,9 @@ package com.example.tourmanagement.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "itineraries")
@@ -23,4 +26,9 @@ public class Itinerary {
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
+
+    // Danh sách dịch vụ/tiện ích tại địa điểm này
+    @OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<ItineraryDetail> details;
 }

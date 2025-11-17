@@ -4,8 +4,10 @@ import com.example.tourmanagement.model.Tour;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TourRepository extends JpaRepository<Tour, Long> {
-    // Có thể thêm các hàm tìm kiếm tùy chọn sau này, ví dụ:
-    // List<Tour> findByDestinationContainingIgnoreCase(String keyword);
+    // Tìm tour theo điểm đến (destination)
+    List<Tour> findByDestinationContainingIgnoreCase(String destination);
 }

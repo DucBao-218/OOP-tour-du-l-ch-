@@ -5,15 +5,37 @@ import lombok.*;
 
 @Entity
 @Table(name = "customers")
-@Getter @Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer extends Nguoi {
+@Builder
+public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "document_number", nullable = false, unique = true, length = 20)
+    // Tên đại diện đoàn
+    @Column(nullable = false)
+    private String representativeName;
+
+    // Số CMND/CCCD/Hộ chiếu
+    @Column(nullable = false, unique = true, length = 20)
     private String documentNumber;
 
+    // Loại giấy tờ (CMND/CCCD/Hộ chiếu)
     @Enumerated(EnumType.STRING)
-    @Column(name = "document_type", nullable = false, length = 10)
+    @Column(nullable = false, length = 10)
     private DocumentType documentType;
+
+    // Địa chỉ khách hàng
+    @Column(nullable = false)
+    private String address;
+
+    // Số điện thoại
+    @Column(nullable = false)
+    private String phone;
+
+    // Email
+    @Column(nullable = false)
+    private String email;
 }

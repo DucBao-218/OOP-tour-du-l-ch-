@@ -40,6 +40,8 @@ public class TicketService {
         departureDate.setAvailableSeats(departureDate.getAvailableSeats() - 1);
         departureDateRepo.save(departureDate);
 
+        ticket.setStatus("BOOKED");
+
         // Lưu Ticket
         return ticketRepo.save(ticket);
     }
@@ -57,5 +59,20 @@ public class TicketService {
 
     public void deleteTicket(Long id) {
         ticketRepo.deleteById(id);
+    }
+
+    public Ticket cancelTicket(Long id) {
+        Ticket ticket = ticketRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy vé"));
+
+        // Đánh dấu trạng thái hủy (cần có field status trong Ticket)
+        ticket.setStatus("CANCELLED");
+
+        // Cộng lại số ghế cho DepartureDate
+        DepartureDate departureDate = ticket.getDepartureDate();
+        departureDate.setAvailableSeats(departureDate.getAvailableSeats() + 1);
+        departureDateRepo.save(departureDate);
+
+        return ticketRepo.save(ticket);
     }
 }

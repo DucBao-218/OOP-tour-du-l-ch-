@@ -30,4 +30,5 @@ public class ItineraryController {
     public void deleteItinerary(@PathVariable Long id) {
         itineraryService.deleteItinerary(id);
     }
+    
 }

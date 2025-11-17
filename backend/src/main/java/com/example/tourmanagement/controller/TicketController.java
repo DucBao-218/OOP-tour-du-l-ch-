@@ -40,4 +40,9 @@ public class TicketController {
     public void deleteTicket(@PathVariable Long id) {
         service.deleteTicket(id);
     }
+
+    @PutMapping("/{id}/cancel")
+    public Ticket cancelTicket(@PathVariable Long id) {
+        return service.cancelTicket(id);
+    }
 }

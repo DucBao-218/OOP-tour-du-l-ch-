@@ -3,42 +3,47 @@ package com.example.tourmanagement.controller;
 import com.example.tourmanagement.model.Tour;
 import com.example.tourmanagement.service.TourService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/tours")
-@CrossOrigin(origins = "http://localhost:5173") // Cho phép frontend React truy cập
+@CrossOrigin(origins = "http://localhost:5173")
 public class TourController {
+    private final TourService service;
 
-    private final TourService tourService;
-
-    public TourController(TourService tourService) {
-        this.tourService = tourService;
+    public TourController(TourService service) {
+        this.service = service;
     }
 
     @GetMapping
     public List<Tour> getAllTours() {
-        return tourService.getAllTours();
+        return service.getAllTours();
     }
 
     @GetMapping("/{id}")
     public Tour getTourById(@PathVariable Long id) {
-        return tourService.getTourById(id);
+        return service.getTourById(id);
     }
 
     @PostMapping
     public Tour createTour(@RequestBody Tour tour) {
-        return tourService.createTour(tour);
+        return service.createTour(tour);
     }
 
     @PutMapping("/{id}")
     public Tour updateTour(@PathVariable Long id, @RequestBody Tour tour) {
-        return tourService.updateTour(id, tour);
+        return service.updateTour(id, tour);
     }
 
     @DeleteMapping("/{id}")
     public void deleteTour(@PathVariable Long id) {
-        tourService.deleteTour(id);
+        service.deleteTour(id);
+    }
+
+    // API tìm kiếm tour theo điểm đến
+    @GetMapping("/search")
+    public List<Tour> searchTours(@RequestParam String destination) {
+        return service.searchByDestination(destination);
     }
 }
-

@@ -18,8 +18,12 @@ public class ItineraryService {
     }
 
     public Itinerary addItinerary(Itinerary itinerary) {
+        if (itinerary.getDetails() != null) {
+            itinerary.getDetails().forEach(d -> d.setItinerary(itinerary));
+        }
         return itineraryRepository.save(itinerary);
     }
+
 
     public void deleteItinerary(Long id) {
         itineraryRepository.deleteById(id);

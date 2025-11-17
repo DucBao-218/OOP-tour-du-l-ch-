@@ -8,41 +8,41 @@ import java.util.List;
 
 @Service
 public class DepartureDateService {
+    private final DepartureDateRepository repo;
 
-    private final DepartureDateRepository departureDateRepository;
-
-    public DepartureDateService(DepartureDateRepository departureDateRepository) {
-        this.departureDateRepository = departureDateRepository;
+    public DepartureDateService(DepartureDateRepository repo) {
+        this.repo = repo;
     }
 
     public List<DepartureDate> getAllDepartureDates() {
-        return departureDateRepository.findAll();
-    }
-
-    public List<DepartureDate> getDepartureDatesByTour(Long tourId) {
-        return departureDateRepository.findByTourId(tourId);
+        return repo.findAll();
     }
 
     public DepartureDate getDepartureDateById(Long id) {
-        return departureDateRepository.findById(id).orElse(null);
+        return repo.findById(id).orElse(null);
     }
 
     public DepartureDate createDepartureDate(DepartureDate departureDate) {
-        return departureDateRepository.save(departureDate);
+        return repo.save(departureDate);
     }
 
     public DepartureDate updateDepartureDate(Long id, DepartureDate updated) {
-        DepartureDate existing = departureDateRepository.findById(id).orElse(null);
+        DepartureDate existing = repo.findById(id).orElse(null);
         if (existing != null) {
             existing.setDepartureDay(updated.getDepartureDay());
             existing.setPrice(updated.getPrice());
+            existing.setAvailableSeats(updated.getAvailableSeats());
             existing.setTour(updated.getTour());
-            return departureDateRepository.save(existing);
+            return repo.save(existing);
         }
         return null;
     }
 
     public void deleteDepartureDate(Long id) {
-        departureDateRepository.deleteById(id);
+        repo.deleteById(id);
+    }
+
+    public List<DepartureDate> getDepartureDatesByTour(Long tourId) {
+        return repo.findByTourId(tourId);
     }
 }

@@ -17,13 +17,19 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getAllCustomers() { return service.getAllCustomers(); }
+    public List<Customer> getAllCustomers() {
+        return service.getAllCustomers();
+    }
 
     @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable Long id) { return service.getCustomerById(id); }
+    public Customer getCustomerById(@PathVariable Long id) {
+        return service.getCustomerById(id);
+    }
 
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) { return service.createCustomer(customer); }
+    public Customer createCustomer(@RequestBody Customer customer) {
+        return service.createCustomer(customer);
+    }
 
     @PutMapping("/{id}")
     public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
@@ -31,5 +37,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCustomer(@PathVariable Long id) { service.deleteCustomer(id); }
+    public void deleteCustomer(@PathVariable Long id) {
+        service.deleteCustomer(id);
+    }
 }
