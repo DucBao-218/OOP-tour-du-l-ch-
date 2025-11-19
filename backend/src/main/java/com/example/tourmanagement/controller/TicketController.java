@@ -1,5 +1,6 @@
 package com.example.tourmanagement.controller;
 
+import com.example.tourmanagement.dto.TicketDTO;
 import com.example.tourmanagement.model.Ticket;
 import com.example.tourmanagement.service.TicketService;
 import org.springframework.web.bind.annotation.*;
@@ -17,22 +18,22 @@ public class TicketController {
     }
 
     @GetMapping
-    public List<Ticket> getAllTickets() {
+    public List<TicketDTO> getAllTickets() {
         return service.getAllTickets();
     }
 
     @GetMapping("/{id}")
-    public Ticket getTicketById(@PathVariable Long id) {
+    public TicketDTO getTicketById(@PathVariable Long id) {
         return service.getTicketById(id);
     }
 
     @PostMapping
-    public Ticket createTicket(@RequestBody Ticket ticket) {
+    public TicketDTO createTicket(@RequestBody Ticket ticket) {
         return service.createTicket(ticket);
     }
 
     @PutMapping("/{id}")
-    public Ticket updateTicket(@PathVariable Long id, @RequestBody Ticket ticket) {
+    public TicketDTO updateTicket(@PathVariable Long id, @RequestBody Ticket ticket) {
         return service.updateTicket(id, ticket);
     }
 
@@ -42,7 +43,7 @@ public class TicketController {
     }
 
     @PutMapping("/{id}/cancel")
-    public Ticket cancelTicket(@PathVariable Long id) {
+    public TicketDTO cancelTicket(@PathVariable Long id) {
         return service.cancelTicket(id);
     }
 }
